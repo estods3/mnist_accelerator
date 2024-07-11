@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-TBD
+Example AND Gate in Verilog
 
 ## How to test
 
-TBD
+Change inputs to the desired numbers to AND together
 
 ## External hardware
 
-TBD
+N/A
