@@ -32,14 +32,14 @@ pinout:
   ui[7]: "Input: Number 2"
 
   # Outputs
-  uo[0]: "Output: AND of Number 1 and 2"
-  uo[1]: "Output: AND of Number 1 and 2"
-  uo[2]: "Output: AND of Number 1 and 2"
-  uo[3]: "Output: AND of Number 1 and 2"
-  uo[4]: "Output: AND of Number 1 and 2"
-  uo[5]: "Output: AND of Number 1 and 2"
-  uo[6]: "Output: AND of Number 1 and 2"
-  uo[7]: "Output: AND of Number 1 and 2"
+  uo[0]: "7 Segment Dislay: Segment a"
+  uo[1]: "7 Segment Dislay: Segment b"
+  uo[2]: "7 Segment Dislay: Segment c"
+  uo[3]: "7 Segment Dislay: Segment d"
+  uo[4]: "7 Segment Dislay: Segment e"
+  uo[5]: "7 Segment Dislay: Segment f"
+  uo[6]: "7 Segment Dislay: Segment g"
+  uo[7]: ""
 
   # Bidirectional pins
   uio[0]: "Input: Number 2"
