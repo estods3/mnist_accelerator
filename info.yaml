@@ -29,7 +29,7 @@ pinout:
   ui[4]: "Image Pixel (Black=0, White=1)"
   ui[5]: "Image Pixel (Black=0, White=1)"
   ui[6]: "Image Pixel (Black=0, White=1)"
-  ui[7]: ""
+  ui[7]: "Status (Image Sent=1)"
 
   # Outputs
   uo[0]: "7 Segment Dislay: Segment a"
@@ -39,13 +39,13 @@ pinout:
   uo[4]: "7 Segment Dislay: Segment e"
   uo[5]: "7 Segment Dislay: Segment f"
   uo[6]: "7 Segment Dislay: Segment g"
-  uo[7]: "BCD Least Significant Bit 1"
+  uo[7]: "Status (Classification Complete=1)"
 
   # Bidirectional pins
-  uio[0]: "BCD Bit 2"
-  uio[1]: "BCD Bit 3"
-  uio[2]: "BCD Most Significant Bit 4"
-  uio[3]: ""
+  uio[0]: "Output: BCD Least Significant Bit 1"
+  uio[1]: "Output: BCD Bit 2"
+  uio[2]: "Output: BCD Bit 3"
+  uio[3]: "Output: BCD Most Significant Bit 4"
   uio[4]: ""
   uio[5]: ""
   uio[6]: ""
