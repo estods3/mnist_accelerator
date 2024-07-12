@@ -20,6 +20,7 @@ Goals:
 * increase performance (speed) to classify image (benchmark: python-based neural net on a raspberry pi.)
 
 Diagram:
+<pre>
  _________________                                                _________                        _________
 |                 |                                              |         |--Output: seg a ----->|         |
 |  Raspberry Pi   |--Input: Pre-processed MNIST Image (7 pins)-->|   Tiny  |--Output: seg b ----->|  Seven  |
@@ -28,7 +29,7 @@ Diagram:
 |                 |                                              |         |--Output: seg e ----->|         |
 |                 |<---------------------- Output: BCD (4 pins)--|         |--Output: seg f ----->|         |
 |_________________|                                              |_________|--Output: seg g ----->|_________|
-
+</pre>
 The Raspberry Pi will hold all of the images from the test set. It will loop through each image, preprocess it (to reduce data size), and deliver it to the ASIC. the ASIC will then return the classification back. This process is repeated for all images in the test set.
 
 The chip's logic is laid out into 4 main components:
