@@ -43,22 +43,23 @@ The chip's logic is laid out into 4 main components:
        |_______|         |________|         |________|         |________|
 </pre>
 
-## I/O
+### I/O
 Wait to recieve image. Read 14x14 pre-processed image into memory by reading 7 pixels at a time, each pixel is 1 bit (black=0, white=1). This will take 14x14=196/7 = 28 clock cycles to read the image.
 
-## Memory
-stores recieved pixels until all 196 pixels of the image have been recieved. Memory will only be able to hold one image at a time.
+### Memory
+Stores recieved pixels until all 196 pixels of the image have been recieved. Memory will only be able to hold one image at a time.
 
-## Neural Network
+### Neural Network
 196 pixels form the input layer of the neural network. Return the classification of the image as a binary coded decimal
 
-## Output
+### Output
 Display the decoded digit on 7 segment display. This section incorporates logic to decode a binary coded decimal (BCD) into 7 segment logic for external 7 segment display.
 Additionally, the output layer should trigger an additional digital pin as a flag to signal the image has finished being processed and another image can be sent from the RaspberryPi.
 
 ## How to test
+A script will be provided to deploy to the RaspberryPi. This script will loop over the MNIST dataset, preprocess each image, transmit to the ASIC, and record the results.
 
-Change inputs to the desired numbers to AND together
+The script will also be configurable to run a python-based (PyTorch) version of the identical neural network created in Verilog for the ASIC. This way, a test can be performed to see how much faster the ASIC version of the network is than the python-based version.
 
 ## External hardware
 A RaspberryPi is needed to preprocess the MNIST images and send them in the correct format to the tiny tapeout ASIC. 
