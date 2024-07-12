@@ -15,5 +15,7 @@ Thanks to [Columbus IEEE Joint Chapter of the Solid-State Circuits and Circuits 
 - [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
 
 ### References
-- [Example TT Seven Segment Display](https://github.com/TinyTapeout/tt05-verilog-demo/blob/main/src/tt_um_seven_segment_seconds.v)
-- 
+- [Example Verilog TT Seven Segment Display](https://github.com/TinyTapeout/tt05-verilog-demo/blob/main/src/tt_um_seven_segment_seconds.v)
+- [Example Verilog reading an image](https://www.edaboard.com/threads/reading-image-file-in-verilog.268155/)
+- [Example PyTorch MNIST Neural Network](https://github.com/pytorch/examples/blob/main/mnist/main.py)
+- [MNIST Database](https://www.kaggle.com/datasets/hojjatk/mnist-dataset)
