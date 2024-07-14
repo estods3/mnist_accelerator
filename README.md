@@ -4,7 +4,7 @@
 Thanks to [Columbus IEEE Joint Chapter of the Solid-State Circuits and Circuits and Systems Societies](https://r2.ieee.org/columbus-ssccas/)!
 
 
-
+<img src="https://github.com/estods3/mnist_accelerator/blob/main/docs/real_image0.png" title="Example MNIST Image" alt="drawing" width="600"/>
 
 <pre>
 torch.Size([1, 1, 14, 14])
