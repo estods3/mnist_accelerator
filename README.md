@@ -10,38 +10,36 @@ Input images from the MNIST dataset are preprocessed by a raspberry pi and trans
 
 Example MNIST Image Reduced to 14x14 Black/White Pixels |  28x7 bit Sequence Representation
 :-------------------------:|:-------------------------:
-<img src="https://github.com/estods3/mnist_accelerator/blob/main/docs/real_image0.png" title="Example MNIST Image Reduced to 14x14 Black/White Pixels" alt="drawing" width="100"/> | <pre>
-Input Pin:  0  1  2  3  4  5  6
-          -----------------------
-Cycle 0   [[0. 0. 0. 0. 0. 0. 0.]
-Cycle 1    [0. 0. 0. 0. 0. 0. 0.]
-Cycle 2    [0. 0. 0. 0. 0. 0. 0.]
-Cycle 3    [0. 0. 0. 0. 0. 0. 0.]
-Cycle 4    [0. 0. 0. 0. 0. 0. 0.]
-Cycle 5    [0. 1. 1. 1. 1. 0. 0.]
-Cycle 6    [0. 0. 0. 0. 1. 1. 1.]
-Cycle 7    [1. 1. 1. 1. 1. 0. 0.]
-Cycle 8    [0. 0. 0. 0. 1. 1. 1.]
-Cycle 9    [1. 1. 0. 0. 0. 0. 0.]
-Cycle 10   [0. 0. 0. 0. 0. 1. 1.]
-Cycle 11   [0. 0. 0. 0. 0. 0. 0.]
-Cycle 12   [0. 0. 0. 0. 0. 0. 1.]
-Cycle 13   [1. 0. 0. 0. 0. 0. 0.]
-Cycle 14   [0. 0. 0. 0. 0. 0. 0.]
-Cycle 15   [1. 1. 1. 0. 0. 0. 0.]
-Cycle 16   [0. 0. 0. 0. 0. 0. 0.]
-Cycle 17   [0. 1. 1. 0. 0. 0. 0.]
-Cycle 18   [0. 0. 0. 0. 0. 0. 1.]
-Cycle 19   [1. 1. 1. 0. 0. 0. 0.]
-Cycle 20   [0. 0. 0. 0. 0. 1. 1.]
-Cycle 21   [1. 1. 0. 0. 0. 0. 0.]
-Cycle 22   [0. 0. 1. 1. 1. 1. 1.]
-Cycle 23   [0. 0. 0. 0. 0. 0. 0.]
-Cycle 24   [0. 0. 1. 1. 1. 1. 0.]
-Cycle 25   [0. 0. 0. 0. 0. 0. 0.]
-Cycle 26   [0. 0. 0. 0. 0. 0. 0.]
-Cycle 27   [0. 0. 0. 0. 0. 0. 0.]]
-</pre>
+<img src="https://github.com/estods3/mnist_accelerator/blob/main/docs/real_image0.png" title="Example MNIST Image Reduced to 14x14 Black/White Pixels" alt="drawing" width="100"/> | Input Pin:  0  1  2  3  4  5  6<br>-----------------------<br>cycle 0   [[0. 0. 0. 0. 0. 0. 0.]<br>Cycle 1    [0. 0. 0. 0. 0. 0. 0.]<br>
+
+
+
+Cycle 2    [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 3    [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 4    [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 5    [0. 1. 1. 1. 1. 0. 0.]<br>
+Cycle 6    [0. 0. 0. 0. 1. 1. 1.]<br>
+Cycle 7    [1. 1. 1. 1. 1. 0. 0.]<br>
+Cycle 8    [0. 0. 0. 0. 1. 1. 1.]<br>
+Cycle 9    [1. 1. 0. 0. 0. 0. 0.]<br>
+Cycle 10   [0. 0. 0. 0. 0. 1. 1.]<br>
+Cycle 11   [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 12   [0. 0. 0. 0. 0. 0. 1.]<br>
+Cycle 13   [1. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 14   [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 15   [1. 1. 1. 0. 0. 0. 0.]<br>
+Cycle 16   [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 17   [0. 1. 1. 0. 0. 0. 0.]<br>
+Cycle 18   [0. 0. 0. 0. 0. 0. 1.]<br>
+Cycle 19   [1. 1. 1. 0. 0. 0. 0.]<br>
+Cycle 20   [0. 0. 0. 0. 0. 1. 1.]<br>
+Cycle 21   [1. 1. 0. 0. 0. 0. 0.]<br>
+Cycle 22   [0. 0. 1. 1. 1. 1. 1.]<br>
+Cycle 23   [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 24   [0. 0. 1. 1. 1. 1. 0.]<br>
+Cycle 25   [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 26   [0. 0. 0. 0. 0. 0. 0.]<br>
+Cycle 27   [0. 0. 0. 0. 0. 0. 0.]]<br>
 
 
 ## Resources
