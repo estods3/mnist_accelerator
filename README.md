@@ -8,10 +8,12 @@ Thanks to [Columbus IEEE Joint Chapter of the Solid-State Circuits and Circuits 
 ## MNIST Dataset + Preprocessing
 Input images from the MNIST dataset are preprocessed by a raspberry pi and transmitted to the ASIC. The images in MNIST are 28x28 grayscale images. However, as part of the preprocessing step, these images are reduced to a 14x14 black/white image to reduce the amount of data needed to be transmitted to the ASIC and to reduce the complexity of the neural network. Since the images are 14x14, a 7-pin interface is used which requires 28 clock cycles to transmit each image.
 
-
+<figure>
 <img src="https://github.com/estods3/mnist_accelerator/blob/main/docs/real_image0.png" title="Example MNIST Image Reduced to 14x14 Black/White Pixels" alt="drawing" width="100"/>
+<figcaption>Example MNIST Image Reduced to 14x14 Black/White Pixels</figcaption>
+</figure>
 
-MNIST Image above represented as a 28x7 bit sequence
+<figure>
 <pre>
 Input Pin:  0  1  2  3  4  5  6
           -----------------------
@@ -44,7 +46,8 @@ Cycle 25   [0. 0. 0. 0. 0. 0. 0.]
 Cycle 26   [0. 0. 0. 0. 0. 0. 0.]
 Cycle 27   [0. 0. 0. 0. 0. 0. 0.]]
 </pre>
-
+<figcaption>MNIST Image above represented as a 28x7 bit sequence</figcaption>
+</figure>
 
 
 ## Resources
