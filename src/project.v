@@ -16,21 +16,23 @@ module tt_um_estods3_nnaccelerator (
     input  wire       rst_n     // reset_n - low to reset
 );
 
-  wire [6:0] led_out;
-  assign uo_out[6:0] = led_out;
-  assign uo_out[7] = 1'b0;
+    wire [6:0] seven_seg_display_out;
+    assign uo_out[6:0] = seven_seg_display_out;
+    assign uo_out[7] = 1'b0;
 
-  reg [3:0] digit;
-  digit <= 0;
+    reg [3:0] digit_classification_bcd;
+    digit_classification_bcd <= 0;
 
-  // instantiate segment display
-  seg7 seg7(.counter(digit), .segments(led_out));
+    // instantiate segment display
+    seg7 seg7(.counter(digit_classification_bcd), .segments(seven_seg_display_out));
     
-  // All output pins must be assigned. If not used, assign to 0.
-  assign uio_out[3:0] = digit;
-  assign uio_oe = 1;
+    // All output pins must be assigned. If not used, assign to 0.
+    assign uio_in = 0;
+    assign uio_out[3:0] = digit_classification_bcd;
+    assign uio_out[7:4] = 0;
+    assign uio_oe = 1;
 
-  // List all unused inputs to prevent warnings
-  wire _unused = &{ena, clk, rst_n, 1'b0};
+    // List all unused inputs to prevent warnings
+    wire _unused = &{ena, clk, rst_n, 1'b0};
 
 endmodule
