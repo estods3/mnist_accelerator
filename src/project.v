@@ -15,24 +15,23 @@ module tt_um_estods3_nnaccelerator (
     input  wire       clk,      // clock
     input  wire       rst_n     // reset_n - low to reset
 );
-    wire [6:0] input_image;
+    wire [6:0] input_image_row;
     wire [6:0] seven_seg_display_out;
 
     assign ui_in[6:0] = input_image_row;
     assign uo_out[6:0] = seven_seg_display_out;
     assign uo_out[7] = 1'b0;
 
-    reg image_array [195:0] //14x14=196 memory
+    reg [195:0] image_array; //14x14=196 memory
     integer i=0; 
 
     
-    reg [3:0] digit_classification_bcd;
-    digit_classification_bcd <= 0;
+    reg [3:0] digit_classification_bcd = 4'b0000;
 
     always@(posedge clk)  
     
-        if(i<196) begin
-            image_array[i:i+6] <= input_image //Read image 7 bits at a time into memory. 
+        if(i<189) begin
+            image_array[i] <= input_image_row; //Read image 7 bits at a time into memory. 
             i <= i + 7;
         end
 
