@@ -62,7 +62,7 @@ async def test_7seg_0(dut):
     print(dut.uo_out.value)  # Seven Segment Values ==> '0'=63
     print(dut.uio_out.value) # BSD Value ==> 00000010
     print(dut.uio_oe.value)
-    assert int(dut.uo_out.value[7]) == 1
+    assert int(dut.uo_out[7].value) == 1
     assert int(dut.uo_out.value[6:0]) == segments[0]
     assert int(dut.uio_out.value) == 0
     assert int(dut.uio_oe.value) == 0xFF
@@ -87,7 +87,7 @@ async def test_7seg_1(dut):
     print(dut.uo_out.value)  # Seven Segment Values ==> '0'=6
     print(dut.uio_out.value) # BSD Value ==> 00000010
     print(dut.uio_oe.value)
-    assert int(dut.uo_out.value[7]) == 1
+    assert int(dut.uo_out[7].value) == 1
     assert int(dut.uo_out.value[6:0]) == segments[1]
     assert int(dut.uio_out.value) == 1
     assert int(dut.uio_oe.value) == 0xFF
