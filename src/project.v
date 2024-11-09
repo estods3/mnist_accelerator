@@ -31,8 +31,8 @@ module tt_um_estods3_nnaccelerator (
 
     // Assign IO
     // ---------
-    assign ui_in[6:0] = input_image_row;                   // First 7 ui_in bits used to read image (row by row)
-    assign ui_in[7] = reset_flag;                          // Last 1 ui_in bit used as a reset_flag
+    assign input_image_row = ui_in[6:0];                   // First 7 ui_in bits used to read image (row by row)
+    assign reset_flag = ui_in[7];                          // Last 1 ui_in bit used as a reset_flag
     assign uo_out[6:0] = seven_seg_display_out;            // First 7 uo_out bits used for 7-seg Display
     assign uo_out[7] = classification_complete_flag;       // Last 1 uo_out bit used as a complete flag
     // use bidirectionals as outputs
@@ -60,7 +60,6 @@ module tt_um_estods3_nnaccelerator (
             // ------------------------------------------------
             digit_classification_bcd <= 4'b0001;
             classification_complete_flag <= 1'b1;
-            image_ready <= 1'b0;
         end else begin
             classification_complete_flag <= 1'b0;
         end

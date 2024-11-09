@@ -32,6 +32,7 @@ module ImageReader(
             row_index <= 0;
             col_index <= 0;
             image_data <= 0;
+            image_ready <= 0;
             //row_data <= 0;
         end else begin
             // State machine transitions
