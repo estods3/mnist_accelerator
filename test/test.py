@@ -57,6 +57,9 @@ async def test_7seg_0(dut):
     await ClockCycles(dut.clk, 10)
     dut.rst_n.value = 1
 
+    # Expected Result
+    Classification_Result = 0
+
     # Test Digit: 0
     dut._log.info("Testing Digit: 0")
     print(dut.uo_out.value)  # Seven Segment Values ==> '0'=63
@@ -64,13 +67,13 @@ async def test_7seg_0(dut):
     print(dut.uio_oe.value)
     if("1.8.1" in cocotb.__version__):
         assert int(dut.uo_out[7].value) == 1
-        assert int(dut.uo_out.value[0:6]) == segments[0]
-        assert int(dut.uio_out.value) == 0
+        assert int(dut.uo_out.value[1:7]) == segments[Classification_Result]
+        assert int(dut.uio_out.value) == Classification_Result
         assert int(dut.uio_oe.value) == 0xFF
     else:
         assert int(dut.uo_out[7].value) == 1
-        assert int(dut.uo_out.value[6:0]) == segments[0]
-        assert int(dut.uio_out.value) == 0
+        assert int(dut.uo_out.value[6:0]) == segments[Classification_Result]
+        assert int(dut.uio_out.value) == Classification_Result
         assert int(dut.uio_oe.value) == 0xFF
 
 @cocotb.test()
