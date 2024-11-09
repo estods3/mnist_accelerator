@@ -19,6 +19,7 @@ project:
   source_files:
     - "project.v"
     - "decoder.v"
+    - "readimage.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:
@@ -30,7 +31,7 @@ pinout:
   ui[4]: "Image Pixel (Black=0, White=1)"
   ui[5]: "Image Pixel (Black=0, White=1)"
   ui[6]: "Image Pixel (Black=0, White=1)"
-  ui[7]: "Status (Image Sent=1)"
+  ui[7]: "Reset (Active Low) - Sends Another Image"
 
   # Outputs
   uo[0]: "7 Segment Dislay: Segment a"
