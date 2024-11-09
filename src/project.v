@@ -18,9 +18,9 @@ module tt_um_estods3_nnaccelerator (
 
     // IO Variables
     // ------------
-    wire [6:0] input_image_row;
+    reg [6:0] input_image_row;
     reg [6:0] seven_seg_display_out;
-    wire reset_flag;
+    reg reset_flag;
     reg classification_complete_flag;
     reg [3:0] digit_classification_bcd;
 
