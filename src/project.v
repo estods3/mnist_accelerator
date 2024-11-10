@@ -57,11 +57,16 @@ module tt_um_estods3_nnaccelerator (
             // Neural Network - Perform Inferencing (Forward Pass)
             // ---------------------------------------------------
             // TODO
-            // add checksum logic. sum image_array. if value is between 0 and 9, set as BCD. (Used for testing).
 
             // Output Layer - Extract Highest Confidence Neuron
             // ------------------------------------------------
-            digit_classification_bcd <= 4'b0001;
+            // TESTING MODE - If the sum of the image is a digit (0-9)
+            if(image_array <= 9) begin
+                digit_classification_bcd <= image_array;
+            end else begin
+                digit_classification_bcd <= 4'b0001; //TODO - replace with output layer
+            end
+
             classification_complete_flag <= 1'b1;
         end else begin
             classification_complete_flag <= 1'b0;

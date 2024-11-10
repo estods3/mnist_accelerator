@@ -9,8 +9,14 @@ from cocotb.triggers import RisingEdge, FallingEdge, Timer, ClockCycles
 
 # Helper Functions
 # ----------------
-#def transmit_image():
-# TODO
+#def transmit_image(dut, input_image):
+#    dut._log.info("Transmitting Image...")
+#    dut.ui_in.value = 0 # Negative Edge (start transmission)
+#    await ClockCycles(dut.clk, 1)
+#    for i in range(0, 28):
+#        dut.ui_in.value = 128 #[1,0,0,0,0,0,0,0]
+#        await ClockCycles(dut.clk, 1)
+#    dut._log.info("Transmitting Image...Done")
 
 # Seven Segments Lookup Table
 # ---------------------------
@@ -56,6 +62,7 @@ async def test_blank_image(dut):
     dut.rst_n.value = 1
 
     # Transmit Input Image (Serial Transmission)
+    #transmit_image(dut, input_image)
     dut._log.info("Transmitting Image...")
     dut.ui_in.value = 0 # Negative Edge (start transmission)
     await ClockCycles(dut.clk, 1)
@@ -84,73 +91,3 @@ async def test_blank_image(dut):
         assert int(dut.uio_out.value) == classification_result
         assert int(dut.uio_oe.value) == 0xFF
     dut._log.info("Evaluating...Done")
-
-@cocotb.test()
-async def test_7seg_0(dut):
-    dut._log.info("Start")
-    clock = Clock(dut.clk, 10, units="us")
-    cocotb.start_soon(clock.start())
-
-    # reset
-    dut._log.info("Reset")
-    dut.ena.value = 1
-    dut.ui_in.value = 0
-    dut.uio_in.value = 0
-    dut.rst_n.value = 0
-    await ClockCycles(dut.clk, 10)
-    dut.rst_n.value = 1
-
-    # Expected Result
-    Classification_Result = 0
-
-    # Test Digit: 0
-    dut._log.info("Testing Digit: 0")
-    print(dut.uo_out.value)  # Seven Segment Values ==> '0'=63
-    print(dut.uio_out.value) # BSD Value ==> 00000010
-    print(dut.uio_oe.value)
-    #if("1.8.1" in cocotb.__version__):
-    #    assert int(dut.uo_out[7].value) == 1
-    #    # Flip Endian-ness
-    #    assert int(dut.uo_out.value[1:7]) == segments[Classification_Result]
-    #    assert int(dut.uio_out.value) == Classification_Result
-    #    assert int(dut.uio_oe.value) == 0xFF
-    #else:
-    #    assert int(dut.uo_out[7].value) == 1
-    #    assert int(dut.uo_out.value[6:0]) == segments[Classification_Result]
-    #    assert int(dut.uio_out.value) == Classification_Result
-    #    assert int(dut.uio_oe.value) == 0xFF
-
-@cocotb.test()
-async def test_7seg_1(dut):
-    dut._log.info("Start")
-    clock = Clock(dut.clk, 10, units="us")
-    cocotb.start_soon(clock.start())
-
-    # reset
-    dut._log.info("Reset")
-    dut.ena.value = 1
-    dut.ui_in.value = 0
-    dut.uio_in.value = 0
-    dut.rst_n.value = 0
-    await ClockCycles(dut.clk, 10)
-    dut.rst_n.value = 1
-
-    # Expected Result
-    Classification_Result = 1
-
-    # Test Digit: 1
-    dut._log.info("Testing Digit: 1")
-    print(dut.uo_out.value)  # Seven Segment Values ==> '0'=6
-    print(dut.uio_out.value) # BSD Value ==> 00000010
-    print(dut.uio_oe.value)
-    if("1.8.1" in cocotb.__version__):
-        assert int(dut.uo_out[7].value) == 1
-        # Flip Endian-ness
-        assert int(dut.uo_out.value[1:7]) == segments[Classification_Result]
-        assert int(dut.uio_out.value) == Classification_Result
-        assert int(dut.uio_oe.value) == 0xFF
-    else:
-        assert int(dut.uo_out[7].value) == 1
-        assert int(dut.uo_out.value[6:0]) == segments[Classification_Result]
-        assert int(dut.uio_out.value) == Classification_Result
-        assert int(dut.uio_oe.value) == 0xFF
