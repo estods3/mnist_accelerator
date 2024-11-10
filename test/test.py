@@ -3,6 +3,7 @@
 
 import cocotb
 from cocotb.types import LogicArray
+from cocotb.binary import BinaryValue
 from cocotb.clock import Clock
 from cocotb.triggers import ClockCycles
 from cocotb.triggers import RisingEdge, FallingEdge, Timer, ClockCycles
@@ -69,9 +70,9 @@ async def test_blank_image(dut):
     # Transmit Input Image (Serial Transmission)
     dut._log.info("Transmitting Image...")
     for row in input_image:
-        dut.ui_in.value = 128 + row[13:7].to_unsigned()
+        dut.ui_in.value = 128 + row[13:7].integer
         await ClockCycles(dut.clk, 1)
-        dut.ui_in.value = 128 + row[6:0].to_unsigned()
+        dut.ui_in.value = 128 + row[6:0].integer
         await ClockCycles(dut.clk, 1)
     dut._log.info("Transmitting Image...Done")
 
@@ -139,9 +140,9 @@ async def test_blank_image_with_1_checksum(dut):
     # Transmit Input Image (Serial Transmission)
     dut._log.info("Transmitting Image...")
     for row in input_image:
-        dut.ui_in.value = 128 + row[13:7].to_unsigned()
+        dut.ui_in.value = 128 + row[13:7].integer
         await ClockCycles(dut.clk, 1)
-        dut.ui_in.value = 128 + row[6:0].to_unsigned()
+        dut.ui_in.value = 128 + row[6:0].integer
         await ClockCycles(dut.clk, 1)
     dut._log.info("Transmitting Image...Done")
 
