@@ -46,15 +46,18 @@ module tt_um_estods3_nnaccelerator (
     // -----------
     // Read Image 7 bits at a time for 28 clock cycles to read full image
     // Another Image will be sent when reset_flag is low
-    //ImageReader ImageReader(.clk(clk), .reset_n(reset_flag), .data_in(input_image_row), .image_data(image_array), .image_ready(image_ready));
+    ImageReader ImageReader(.clk(clk), .reset_n(reset_flag), .data_in(input_image_row), .image_data(image_array), .image_ready(image_ready));
 
+    // Process Image
+    // -------------
     always @(posedge clk) begin
-        image_ready <= 1'b1;     //TESTING ONLY, REMOVE
+        //image_ready <= 1'b1;     //TESTING ONLY, REMOVE
         if(image_ready) begin
 
             // Neural Network - Perform Inferencing (Forward Pass)
             // ---------------------------------------------------
             // TODO
+            // add checksum logic. sum image_array. if value is between 0 and 9, set as BCD. (Used for testing).
 
             // Output Layer - Extract Highest Confidence Neuron
             // ------------------------------------------------
@@ -71,6 +74,5 @@ module tt_um_estods3_nnaccelerator (
     // output classification as BCD to output pins
     // raise flag to signal to raspberry pi to send another image
     seg7 seg7(.counter(digit_classification_bcd), .segments(seven_seg_display_out));
-    //classification_complete_flag <= 1'b1; // how to set this to 1 without error? TODO
 
 endmodule
