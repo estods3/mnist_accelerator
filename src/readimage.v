@@ -13,11 +13,7 @@ module ImageReader(
     output reg image_ready                    // Output flag to signal the image is ready (active high)
 );
 
-    // Internal variables
-    //reg [7:0] row_data [0:13];              // Array to store each row of 7 bits
-
     // Registers for address and control
-    reg [7:0] index;                          // Index for bits read and next position in image_data. 28 rows of 7 bits (0 to 195)
     reg [4:0] rows_read;                      // Index to keep track of the number of rows that have been read since last reset_n
 
     // State machine states
@@ -27,9 +23,9 @@ module ImageReader(
 
     always @(posedge clk or negedge reset_n) begin
         if (~reset_n) begin
+            //$display("RESET!!");
             // Reset conditions
             state <= READ_DATA;
-            index <= 195;
             rows_read <= 0;
             image_data <= 0;
             image_ready <= 0;
@@ -41,14 +37,18 @@ module ImageReader(
 
                 READ_DATA: begin
                     // Read data from input bus and store in image_data
-                    image_data[index] <= data_in;
-                    index <= index - 7;
-                    rows_read <= rows_read + 1;
+                    if (rows_read < 28) begin
+                        image_data = (image_data << 7) | data_in;
+                        rows_read <= rows_read + 1;
+                        //$display("--------");
+                        //$display(data_in);
+                        //$display(image_data);
+                        //$display(rows_read);
+                    end
 
                     // Check if all rows are read
                     if (rows_read == 28) begin
                         state <= IDLE;
-                        index <= 0;
                         image_ready <= 1'b1;  // flag that image has been read
                     end
                 end

@@ -81,9 +81,9 @@ async def test_blank_image(dut):
 
     # Evaluate Results
     dut._log.info("Evaluating...")
-    #print(dut.uo_out.value)
-    #print(dut.uio_out.value)
-    #print(dut.uio_oe.value)
+    print(dut.uo_out.value)
+    print(dut.uio_out.value)
+    print(dut.uio_oe.value)
     assert int(dut.uo_out[7].value) == 1  #Test Classification Flag set to 1
     assert int(dut.uio_oe.value) == 0xFF  #Test All Bidirectional I/O Output Enable set to '1'
     assert int(dut.uio_out.value) == classification_result
@@ -151,9 +151,9 @@ async def test_blank_image_with_1_checksum(dut):
 
     # Evaluate Results
     dut._log.info("Evaluating...")
-    #print(dut.uo_out.value)
-    #print(dut.uio_out.value)
-    #print(dut.uio_oe.value)
+    print(dut.uo_out.value)
+    print(dut.uio_out.value)
+    print(dut.uio_oe.value)
     assert int(dut.uo_out[7].value) == 1  #Test Classification Flag set to 1
     assert int(dut.uio_oe.value) == 0xFF  #Test All Bidirectional I/O Output Enable set to '1'
     assert int(dut.uio_out.value) == classification_result
@@ -212,10 +212,10 @@ async def test_blank_image_with_2_checksum(dut):
     for row in input_image:
         dut.ui_in.value = 128 + row[13:7].integer
         await ClockCycles(dut.clk, 1)
-        print(dut.ui_in.value)
+        #print(dut.ui_in.value)
         dut.ui_in.value = 128 + row[6:0].integer
         await ClockCycles(dut.clk, 1)
-        print(dut.ui_in.value)
+        #print(dut.ui_in.value)
     dut._log.info("Transmitting Image...Done")
 
     # Wait for Additional Clock Cycle(s) Before Evaluating
@@ -585,3 +585,144 @@ async def test_blank_image_with_7_checksum(dut):
     else:
         assert int(dut.uo_out.value[6:0]) == segments[classification_result]
     dut._log.info("Evaluating...Done")
+
+@cocotb.test()
+async def test_blank_image_with_8_checksum(dut):
+    # Test 9: Blank Image with 8 checksum
+    # Author: estods3
+    # Input: Blank (all 0s) 14x14 image with a 8 checksum
+    # Expected Result: BSD = 8, Seven Segment = 127
+    # --------------------------------------------
+    input_image = [LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000001000")]
+
+    classification_result = 8
+
+    # PERFORM TEST
+    # ------------
+    # Set the clock period to 10 us (100 KHz)
+    clock = Clock(dut.clk, 10, units="us")
+    cocotb.start_soon(clock.start())
+
+    # Initial Conditions
+    dut.ena.value = 1
+    dut.ui_in.value = 128
+    dut.uio_in.value = 0
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 10)
+    dut.rst_n.value = 1
+
+    # Enter "READ" Mode
+    dut.ui_in.value = 0                       # Negative Edge (start transmission)
+    await ClockCycles(dut.clk, 2)
+    assert int(dut.uo_out[7].value) == 0      # Confirm Outputs Invalid (flag = 0) before Image is Transmitted
+
+    # Transmit Input Image (Serial Transmission)
+    dut._log.info("Transmitting Image...")
+    for row in input_image:
+        dut.ui_in.value = 128 + row[13:7].integer
+        await ClockCycles(dut.clk, 1)
+        dut.ui_in.value = 128 + row[6:0].integer
+        await ClockCycles(dut.clk, 1)
+    dut._log.info("Transmitting Image...Done")
+
+    # Wait for Additional Clock Cycle(s) Before Evaluating
+    await ClockCycles(dut.clk, 10)
+
+    # Evaluate Results
+    dut._log.info("Evaluating...")
+    #print(dut.uo_out.value)
+    #print(dut.uio_out.value)
+    #print(dut.uio_oe.value)
+    assert int(dut.uo_out[7].value) == 1  #Test Classification Flag set to 1
+    assert int(dut.uio_oe.value) == 0xFF  #Test All Bidirectional I/O Output Enable set to '1'
+    assert int(dut.uio_out.value) == classification_result
+    if("1.8.1" in cocotb.__version__):
+        # Flip Endian-ness in cocotb v1.8.1
+        assert int(dut.uo_out.value[1:7]) == segments[classification_result]
+    else:
+        assert int(dut.uo_out.value[6:0]) == segments[classification_result]
+    dut._log.info("Evaluating...Done")
+
+@cocotb.test()
+async def test_blank_image_with_9_checksum(dut):
+    # Test 10: Blank Image with 9 checksum
+    # Author: estods3
+    # Input: Blank (all 0s) 14x14 image with a 9 checksum
+    # Expected Result: BSD = 9, Seven Segment = 111
+    # --------------------------------------------
+    input_image = [LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000000000"), \
+                   LogicArray("00000000001001")]
+
+    classification_result = 9
+
+    # PERFORM TEST
+    # ------------
+    # Set the clock period to 10 us (100 KHz)
+    clock = Clock(dut.clk, 10, units="us")
+    cocotb.start_soon(clock.start())
+
+    # Initial Conditions
+    dut.ena.value = 1
+    dut.ui_in.value = 128
+    dut.uio_in.value = 0
+    dut.rst_n.value = 0
+    await ClockCycles(dut.clk, 10)
+    dut.rst_n.value = 1
+
+    # Enter "READ" Mode
+    dut.ui_in.value = 0                       # Negative Edge (start transmission)
+    await ClockCycles(dut.clk, 2)
+    assert int(dut.uo_out[7].value) == 0      # Confirm Outputs Invalid (flag = 0) before Image is Transmitted
+
+    # Transmit Input Image (Serial Transmission)
+    dut._log.info("Transmitting Image...")
+    for row in input_image:
+        dut.ui_in.value = 128 + row[13:7].integer
+        await ClockCycles(dut.clk, 1)
+        dut.ui_in.value = 128 + row[6:0].integer
+        await ClockCycles(dut.clk, 1)
+    dut._log.info("Transmitting Image...Done")
+
+    # Wait for Additional Clock Cycle(s) Before Evaluating
+    await ClockCycles(dut.clk, 10)
+
+    # Evaluate Results
+    dut._log.info("Evaluating...")
+    #print(dut.uo_out.value)
+    #print(dut.uio_out.value)
+    #print(dut.uio_oe.value)
+    assert int(dut.uo_out[7].value) == 1  #Test Classification Flag set to 1
+    assert int(dut.uio_oe.value) == 0xFF  #Test All Bidirectional I/O Output Enable set to '1'
+    assert int(dut.uio_out.value) == classification_result
+    if("1.8.1" in cocotb.__version__):
+        # Flip Endian-ness in cocotb v1.8.1
+        assert int(dut.uo_out.value[1:7]) == segments[classification_result]
+    else:
+        assert int(dut.uo_out.value[6:0]) == segments[classification_result]
+    dut._log.info("Evaluating...Done")
+

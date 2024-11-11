@@ -47,11 +47,12 @@ module tt_um_estods3_nnaccelerator (
     // Read Image 7 bits at a time for 28 clock cycles to read full image
     // Another Image will be sent when reset_flag is low
     ImageReader ImageReader(.clk(clk), .reset_n(reset_flag), .data_in(input_image_row), .image_data(image_array), .image_ready(image_ready));
-
+    
     // Process Image
     // -------------
     always @(posedge clk) begin
         //image_ready <= 1'b1;     //TESTING ONLY, REMOVE
+        //image_array <= 10;       //TESTING ONLY, REMOVE
         if(image_ready) begin
 
             // Neural Network - Perform Inferencing (Forward Pass)
@@ -61,10 +62,11 @@ module tt_um_estods3_nnaccelerator (
             // Output Layer - Extract Highest Confidence Neuron
             // ------------------------------------------------
             // TESTING MODE - If the sum of the image is a digit (0-9)
-            if(image_array <= 9) begin
+            if(image_array <= 196'd9) begin
                 digit_classification_bcd <= image_array;
+                //$display(digit_classification_bcd);
             end else begin
-                digit_classification_bcd <= 4'b0001; //TODO - replace with output layer
+                digit_classification_bcd <= 4'b0011; //TODO - replace with output layer
             end
 
             classification_complete_flag <= 1'b1;
