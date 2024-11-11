@@ -63,4 +63,4 @@ The script will also be configurable to run a python-based (PyTorch) version of 
 
 ## External hardware
 A RaspberryPi is needed to preprocess the MNIST images and send them in the correct format to the tiny tapeout ASIC. 
-A Seven Segment Display can be used to display the output classification from the deep learning accelerator.
+A Seven Segment Display can be used to display the output classification.
