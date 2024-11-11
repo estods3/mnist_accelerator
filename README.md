@@ -7,7 +7,7 @@ Thanks to [Columbus IEEE Joint Chapter of the Solid-State Circuits and Circuits 
 
 Example
 
-MNIST Image |  Pre-Processing | Neural Network | Classification
+MNIST Image |  Serialized to ASIC | Neural Network | Classification
 :----------:|:---------------:|:--------------:|:--------------
 <img src="https://github.com/estods3/mnist_accelerator/blob/main/docs/real_image0.png" title="Example MNIST Image Reduced to 14x14 Black/White Pixels" alt="drawing" width="100"/><br>MNIST Image | Input Pin:  0  1  2  3  4  5  6<br>----------------------------------<br>Cycle 0   [[0. 0. 0. 0. 0. 0. 0.]<br>Cycle 1    [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 2    [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 3    [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 4    [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 5    [0. 1. 1. 1. 1. 0. 0.]<br>Cycle 6    [0. 0. 0. 0. 1. 1. 1.]<br>Cycle 7    [1. 1. 1. 1. 1. 0. 0.]<br>Cycle 8    [0. 0. 0. 0. 1. 1. 1.]<br>Cycle 9    [1. 1. 0. 0. 0. 0. 0.]<br>Cycle 10   [0. 0. 0. 0. 0. 1. 1.]<br>Cycle 11   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 12   [0. 0. 0. 0. 0. 0. 1.]<br>Cycle 13   [1. 0. 0. 0. 0. 0. 0.]<br>Cycle 14   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 15   [1. 1. 1. 0. 0. 0. 0.]<br>Cycle 16   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 17   [0. 1. 1. 0. 0. 0. 0.]<br>Cycle 18   [0. 0. 0. 0. 0. 0. 1.]<br>Cycle 19   [1. 1. 1. 0. 0. 0. 0.]<br>Cycle 20   [0. 0. 0. 0. 0. 1. 1.]<br>Cycle 21   [1. 1. 0. 0. 0. 0. 0.]<br>Cycle 22   [0. 0. 1. 1. 1. 1. 1.]<br>Cycle 23   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 24   [0. 0. 1. 1. 1. 1. 0.]<br>Cycle 25   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 26   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 27   [0. 0. 0. 0. 0. 0. 0.]]<br> | ? | 5
 
