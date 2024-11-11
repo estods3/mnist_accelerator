@@ -3,7 +3,7 @@
 # MNIST Handwritten Digit Deep Learning Accelerator ASIC
 A deep learning accelerator ASIC chip design to classify images from the MNIST handwritten image dataset.
 
-<p align="center">Source: Wikipedia - MNIST database<img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/MnistExamplesModified.png" /></p>
+<p align="center"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f7/MnistExamplesModified.png" /><br>Source: Wikipedia - MNIST database</p>
 
 Design implementation for Tiny Tapeout.
 
