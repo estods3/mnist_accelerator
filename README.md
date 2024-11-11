@@ -13,6 +13,11 @@ MNIST Image |  Pre-Processing | Neural Network | Classification
 <img src="https://github.com/estods3/mnist_accelerator/blob/main/docs/real_image0.png" title="Example MNIST Image Reduced to 14x14 Black/White Pixels" alt="drawing" width="100"/><br>MNIST Image<br>reduced to 14x14 black/white pixels | Input Pin:  0  1  2  3  4  5  6<br>----------------------------------<br>Cycle 0   [[0. 0. 0. 0. 0. 0. 0.]<br>Cycle 1    [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 2    [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 3    [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 4    [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 5    [0. 1. 1. 1. 1. 0. 0.]<br>Cycle 6    [0. 0. 0. 0. 1. 1. 1.]<br>Cycle 7    [1. 1. 1. 1. 1. 0. 0.]<br>Cycle 8    [0. 0. 0. 0. 1. 1. 1.]<br>Cycle 9    [1. 1. 0. 0. 0. 0. 0.]<br>Cycle 10   [0. 0. 0. 0. 0. 1. 1.]<br>Cycle 11   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 12   [0. 0. 0. 0. 0. 0. 1.]<br>Cycle 13   [1. 0. 0. 0. 0. 0. 0.]<br>Cycle 14   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 15   [1. 1. 1. 0. 0. 0. 0.]<br>Cycle 16   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 17   [0. 1. 1. 0. 0. 0. 0.]<br>Cycle 18   [0. 0. 0. 0. 0. 0. 1.]<br>Cycle 19   [1. 1. 1. 0. 0. 0. 0.]<br>Cycle 20   [0. 0. 0. 0. 0. 1. 1.]<br>Cycle 21   [1. 1. 0. 0. 0. 0. 0.]<br>Cycle 22   [0. 0. 1. 1. 1. 1. 1.]<br>Cycle 23   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 24   [0. 0. 1. 1. 1. 1. 0.]<br>Cycle 25   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 26   [0. 0. 0. 0. 0. 0. 0.]<br>Cycle 27   [0. 0. 0. 0. 0. 0. 0.]]<br> | ? | 5
 
 
+##
+
+![Render](https://camo.githubusercontent.com/228b13205764a96e707eca359e2bbcf6d30f91d01d457b0facd95521e1a55917/68747470733a2f2f6573746f6473332e6769746875622e696f2f6d6e6973745f616363656c657261746f722f6764735f72656e6465722e706e67)
+
+
 ## Resources
 
 ### Tiny Tapeout
