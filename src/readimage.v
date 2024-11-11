@@ -38,7 +38,7 @@ module ImageReader(
                 READ_DATA: begin
                     // Read data from input bus and store in image_data
                     if (rows_read < 28) begin
-                        image_data = (image_data << 7) | data_in;
+                        image_data <= (image_data << 7) | data_in;
                         rows_read <= rows_read + 1;
                         //$display("--------");
                         //$display(data_in);
