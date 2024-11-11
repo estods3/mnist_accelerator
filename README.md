@@ -2,6 +2,7 @@
 
 # MNIST Handwritten Digit Deep Learning Accelerator ASIC
 A deep learning accelerator ASIC chip design to classify images from the MNIST handwritten image dataset.
+Design implementation for Tiny Tapeout.
 
 Thanks to [Columbus IEEE Joint Chapter of the Solid-State Circuits and Circuits and Systems Societies](https://r2.ieee.org/columbus-ssccas/)!
 
@@ -31,17 +32,15 @@ Latest GDS Rendering:
 Goal - show results of chip vs identical python-based neural network implementation.
 
 
-## Resources
-- [MNIST Dataset](https://en.wikipedia.org/wiki/MNIST_database)
 
-### Tiny Tapeout
+## Tiny Tapeout
 - [FAQ](https://tinytapeout.com/faq/)
 - [Digital design lessons](https://tinytapeout.com/digital_design/)
 - [Learn how semiconductors work](https://tinytapeout.com/siliwiz/)
 - [Join the community](https://tinytapeout.com/discord)
 - [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
 
-### References
+## References
 - [Example Verilog TT Seven Segment Display](https://github.com/TinyTapeout/tt05-verilog-demo/blob/main/src/tt_um_seven_segment_seconds.v)
 - [Example Verilog reading an image](https://www.edaboard.com/threads/reading-image-file-in-verilog.268155/)
 - [Example PyTorch MNIST Neural Network](https://github.com/pytorch/examples/blob/main/mnist/main.py)
