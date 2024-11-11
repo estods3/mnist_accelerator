@@ -54,6 +54,8 @@ class Net(nn.Module):
 ```
 
 ### Hardware Implementation
+Implemented into Verilog as a main file: project.v with 3 supporting files for readimage.v, neuralnetwork.v, and decoder.v
+
 Latest GDS Rendering:
 ![Latest GDS Render](https://camo.githubusercontent.com/228b13205764a96e707eca359e2bbcf6d30f91d01d457b0facd95521e1a55917/68747470733a2f2f6573746f6473332e6769746875622e696f2f6d6e6973745f616363656c657261746f722f6764735f72656e6465722e706e67)
 
