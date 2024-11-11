@@ -20,6 +20,7 @@ A preprocessing python script is provided to convert the standard MNIST images i
 ## Design
 
 ### Neural Network
+Based on [MNIST pytorch example](https://github.com/pytorch/examples/tree/main/mnist). 
 
 ### Hardware Implementation
 Latest GDS Rendering:
