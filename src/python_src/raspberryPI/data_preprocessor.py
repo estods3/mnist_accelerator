@@ -10,7 +10,7 @@ from torchvision import datasets, transforms, utils
 from torch.optim.lr_scheduler import StepLR
 
 # Image Preprocessor
-#
+# desc - function to preprocess MNIST images for use with ASIC or Python(pytorch) NN
 #
 def preprocessor():
     image_threshold = 0
@@ -35,7 +35,7 @@ def test_writer(row):
         testcasefile.write("    # Test: Batch="+ str(row["batch"])+", Sample="+str(row["sample"])+"\n")
         testcasefile.write("    # Author: estods3\n")
         testcasefile.write("    # Input: described in 'input_image'\n")
-        testcasefile.write("    # Expected Result: BSD = " + str(row["label"]) + "\n")
+        testcasefile.write("    # Expected Result: BCD = " + str(row["label"]) + "\n")
         testcasefile.write("    # --------------------------------------------" + "\n")
         testcasefile.write("    input_image = [LogicArray(\"" + row["data vector"][0:14] + "\"), \\" + "\n")
         for ind in range(14, len(row["data vector"]), 14):

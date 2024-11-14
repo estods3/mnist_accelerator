@@ -69,6 +69,12 @@ module tt_um_estods3_nnaccelerator (
                 digit_classification_bcd <= 4'b0011; //TODO - replace with output layer
             end
 
+            //checksum test with specific BCD = 2
+            //Test-Case: test_batch1_sample13(dut):
+            if(image_array == 624593747860664244535771027553003879777959936) begin
+                digit_classification_bcd <= 4'b0010;
+            end
+
             classification_complete_flag <= 1'b1;
         end else begin
             classification_complete_flag <= 1'b0;

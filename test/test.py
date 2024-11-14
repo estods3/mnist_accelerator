@@ -29,7 +29,7 @@ async def test_blank_image(dut):
     # Test 1: Blank Image
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image.
-    # Expected Result: BSD = 0, Seven Segment = 63
+    # Expected Result: BCD = 0, Seven Segment = 63
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -99,7 +99,7 @@ async def test_blank_image_with_1_checksum(dut):
     # Test 2: Blank Image with 1 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a '1' in LSB
-    # Expected Result: BSD = 1, Seven Segment = 6
+    # Expected Result: BCD = 1, Seven Segment = 6
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -169,7 +169,7 @@ async def test_blank_image_with_2_checksum(dut):
     # Test 3: Blank Image with 2 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a 2 checksum
-    # Expected Result: BSD = 2, Seven Segment = 91
+    # Expected Result: BCD = 2, Seven Segment = 91
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -241,7 +241,7 @@ async def test_blank_image_with_3_checksum(dut):
     # Test 4: Blank Image with 3 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a 3 checksum
-    # Expected Result: BSD = 3, Seven Segment = 79
+    # Expected Result: BCD = 3, Seven Segment = 79
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -311,7 +311,7 @@ async def test_blank_image_with_4_checksum(dut):
     # Test 5: Blank Image with 4 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a 4 checksum
-    # Expected Result: BSD = 4, Seven Segment = 102
+    # Expected Result: BCD = 4, Seven Segment = 102
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -381,7 +381,7 @@ async def test_blank_image_with_5_checksum(dut):
     # Test 6: Blank Image with 5 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a 5 checksum
-    # Expected Result: BSD = 5, Seven Segment = 109
+    # Expected Result: BCD = 5, Seven Segment = 109
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -451,7 +451,7 @@ async def test_blank_image_with_6_checksum(dut):
     # Test 7: Blank Image with 6 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a 6 checksum
-    # Expected Result: BSD = 6, Seven Segment = 125
+    # Expected Result: BCD = 6, Seven Segment = 125
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -521,7 +521,7 @@ async def test_blank_image_with_7_checksum(dut):
     # Test 8: Blank Image with 7 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a 7 checksum
-    # Expected Result: BSD = 7, Seven Segment = 7
+    # Expected Result: BCD = 7, Seven Segment = 7
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -591,7 +591,7 @@ async def test_blank_image_with_8_checksum(dut):
     # Test 9: Blank Image with 8 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a 8 checksum
-    # Expected Result: BSD = 8, Seven Segment = 127
+    # Expected Result: BCD = 8, Seven Segment = 127
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -661,7 +661,7 @@ async def test_blank_image_with_9_checksum(dut):
     # Test 10: Blank Image with 9 checksum
     # Author: estods3
     # Input: Blank (all 0s) 14x14 image with a 9 checksum
-    # Expected Result: BSD = 9, Seven Segment = 111
+    # Expected Result: BCD = 9, Seven Segment = 111
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -739,7 +739,7 @@ async def test_batch1_sample21(dut):
     # Test: Batch=1, Sample=21
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 4
+    # Expected Result: BCD = 4
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -813,7 +813,7 @@ async def test_batch0_sample11(dut):
     # Test: Batch=0, Sample=11
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 6
+    # Expected Result: BCD = 6
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000110000000"), \
@@ -887,7 +887,7 @@ async def test_batch1_sample23(dut):
     # Test: Batch=1, Sample=23
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 3
+    # Expected Result: BCD = 3
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -961,7 +961,7 @@ async def test_batch1_sample13(dut):
     # Test: Batch=1, Sample=13
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 2
+    # Expected Result: BCD = 2
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -1035,7 +1035,7 @@ async def test_batch1_sample63(dut):
     # Test: Batch=1, Sample=63
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 5
+    # Expected Result: BCD = 5
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -1109,7 +1109,7 @@ async def test_batch1_sample10(dut):
     # Test: Batch=1, Sample=10
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 1
+    # Expected Result: BCD = 1
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -1183,7 +1183,7 @@ async def test_batch0_sample5(dut):
     # Test: Batch=0, Sample=5
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 1
+    # Expected Result: BCD = 1
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -1257,7 +1257,7 @@ async def test_batch1_sample37(dut):
     # Test: Batch=1, Sample=37
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 0
+    # Expected Result: BCD = 0
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -1331,7 +1331,7 @@ async def test_batch0_sample12(dut):
     # Test: Batch=0, Sample=12
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 9
+    # Expected Result: BCD = 9
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
@@ -1405,7 +1405,7 @@ async def test_batch0_sample18(dut):
     # Test: Batch=0, Sample=18
     # Author: estods3
     # Input: described in 'input_image'
-    # Expected Result: BSD = 3
+    # Expected Result: BCD = 3
     # --------------------------------------------
     input_image = [LogicArray("00000000000000"), \
                    LogicArray("00000000000000"), \
