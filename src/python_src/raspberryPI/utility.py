@@ -8,6 +8,7 @@ import torch.optim as optim
 from torchvision import datasets, transforms, utils
 from torch.optim.lr_scheduler import StepLR
 import torch.quantization as quant
+import pandas as pd
 
 from data_preprocessor import preprocessor, generate_cocotb_tests
 
@@ -111,7 +112,7 @@ def train_model():
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',help='input batch size for training (default: 64)')
     parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',help='input batch size for testing (default: 1000)')
-    parser.add_argument('--epochs', type=int, default=14, metavar='N', help='number of epochs to train (default: 14)')
+    parser.add_argument('--epochs', type=int, default=5, metavar='N', help='number of epochs to train (default: 14)')
     parser.add_argument('--lr', type=float, default=1.0, metavar='LR', help='learning rate (default: 1.0)')
     parser.add_argument('--gamma', type=float, default=0.7, metavar='M',help='Learning rate step gamma (default: 0.7)')
     parser.add_argument('--no-cuda', action='store_true', default=False, help='disables CUDA training')
@@ -172,13 +173,13 @@ def train_model():
     #model = quant.convert(model)
 
     # FP16 inference
-    model = model.half()  # Convert model to FP16
+    #model = model.half()  # Convert model to FP16
 
-    scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
-    for epoch in range(1, args.epochs + 1):
-        #train(args, model, device, train_loader, optimizer, epoch)
-        test(model, device, test_loader)
-        scheduler.step()
+    #scheduler = StepLR(optimizer, step_size=1, gamma=args.gamma)
+    #for epoch in range(1, args.epochs + 1):
+    #    #train(args, model, device, train_loader, optimizer, epoch)
+    #    test(model, device, test_loader)
+    #    scheduler.step()
     
     return model
 
@@ -242,7 +243,7 @@ def generate_testcases():
     test_dataframe = pd.DataFrame(columns=["batch", "sample", "data vector", "label"])
     for batch_idx, (data, target) in enumerate(test_loader):
         print(str(batch_idx) + " ", end='')
-        if(data.shape == (args.batch_size, 1, 14, 14)):
+        if(data.shape == (test_kwargs["batch_size"], 1, 14, 14)):
             for i, single_image in enumerate(data):
                 flat_list = single_image.numpy().flatten(order='C').tolist()
                 vector = ''.join(str(int(x)) for x in flat_list)
@@ -273,7 +274,6 @@ if __name__ == '__main__':
     print("\t(3) Convert Pytorch Model to Verilog file neuralnetwork.v")
     print("\t(4) Generate cocotb testcases for Verilog testbench (test.py)")
 
-
     selection = input("Enter an option (1-4): ")
     if(selection == '1'):
         print("Training Model...")
@@ -286,8 +286,8 @@ if __name__ == '__main__':
         # Load from File
         print("Loading Model...")
         model = Net()
-        checkpoint = torch.load("mnist_cnn.pt")
-        model.load_state_dict(checkpoint['model_state_dict'])
+        model.load_state_dict(torch.load('mnist_cnn.pt'))
+        model.eval()
         #optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         print("Loading Model...Done")
         # call testing function
@@ -298,8 +298,8 @@ if __name__ == '__main__':
         # Load from File
         print("Loading Model")
         model = Net()
-        checkpoint = torch.load("mnist_cnn.pt")
-        model.load_state_dict(checkpoint['model_state_dict'])
+        model.load_state_dict(torch.load('mnist_cnn.pt'))
+        model.eval()
         print("Loading Model...Done")
         # convert model
         # TODO
