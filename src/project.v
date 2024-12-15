@@ -64,7 +64,6 @@ module tt_um_estods3_nnaccelerator (
             // TESTING MODE - If the sum of the image is a digit (0-9)
             if(image_array <= 196'd9) begin
                 digit_classification_bcd <= image_array;
-                //$display(digit_classification_bcd);
             end else begin
                 digit_classification_bcd <= 4'b0011; //TODO - replace with output layer
             end
