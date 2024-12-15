@@ -12,7 +12,7 @@ Thanks to [Columbus IEEE Joint Chapter of the Solid-State Circuits and Circuits 
 Example:
 
 Input --> |  Serialized to ASIC --> | Neural Network --> | Output
-:----------:|:---------------:|:--------------:|:--------------
+:----------:|---------------:|:--------------:|:--------------
 <img src="https://github.com/estods3/mnist_accelerator/blob/main/docs/real_image0.png" title="Example MNIST Image Reduced to 14x14 Black/White Pixels" alt="drawing" width="100"/><br>MNIST Image | Cycle  Input Pin: 0123456 0123456<br>----------------------------------<br>0-1&emsp;&emsp;0000000 0000000<br>2-3&emsp;&emsp;0000000 0000000<br>4-5&emsp;&emsp;0000000 0111100<br>6-7&emsp;&emsp;0000111 1111100<br>8-9&emsp;&emsp;0000111 1100000<br>10-11&emsp;&ensp;0000011 0000000<br>12-13&emsp;&ensp;0000001 1000000<br>14-15&emsp;&ensp;0000000 1110000<br>16-17   0000000 0110000<br>18-19   0000001 1110000<br>20-21   0000011 1100000<br>22-23   0011111 0000000<br>24-25   0011110 0000000<br>26-27   0000000 0000000<br> | ? | BCD: 0101 = 5<br><br>7-Segment:5
 
 ## MNIST Dataset + Preprocessing
