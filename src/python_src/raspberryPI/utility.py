@@ -270,11 +270,12 @@ if __name__ == '__main__':
     print("")
     print("MNIST Python Utility:")
     print("\t(1) Train Pytorch Model and save parameters")
-    print("\t(2) Test Pytorch Model against test-set")
+    print("\t(2) Test Pytorch Model against MNIST testset")
     print("\t(3) Convert Pytorch Model to Verilog file neuralnetwork.v")
     print("\t(4) Generate cocotb testcases for Verilog testbench (test.py)")
+    print("\t(5) Perform Benchmark - Run Pytorch and Tiny Tapeout chip in parallel (TBD)")
 
-    selection = input("Enter an option (1-4): ")
+    selection = input("Enter an option (1-5): ")
     if(selection == '1'):
         print("Training Model...")
         model = train_model()
