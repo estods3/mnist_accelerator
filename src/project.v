@@ -23,6 +23,7 @@ module tt_um_estods3_nnaccelerator (
     reg reset_flag;
     reg classification_complete_flag;
     reg [3:0] digit_classification_bcd;
+    reg [3:0] digit_classification_nn_bcd;
 
     // INTERNAL Variables
     // ------------------
@@ -57,7 +58,7 @@ module tt_um_estods3_nnaccelerator (
 
             // Neural Network - Perform Inferencing (Forward Pass)
             // ---------------------------------------------------
-            // TODO
+            digit_classifier digit_classifier(.image_in(image_array), .digit_out(digit_classification_nn_bcd));
 
             // Output Layer - Extract Highest Confidence Neuron
             // ------------------------------------------------
@@ -65,7 +66,7 @@ module tt_um_estods3_nnaccelerator (
             if(image_array <= 196'd9) begin
                 digit_classification_bcd <= image_array;
             end else begin
-                digit_classification_bcd <= 4'b0011; //TODO - replace with output layer
+                digit_classification_bcd <= digit_classification__nn_bcd; 
             end
 
             //checksum test with specific BCD = 2

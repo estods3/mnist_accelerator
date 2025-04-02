@@ -20,6 +20,7 @@ project:
     - "project.v"
     - "decoder.v"
     - "readimage.v"
+    - "neuralnetwork.v"
 
 # The pinout of your project. Leave unused pins blank. DO NOT delete or add any pins.
 pinout:

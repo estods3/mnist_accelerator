@@ -1,3 +1,9 @@
+#
+# Copyright (c) 2024 Evan Stoddart
+# github.com/estods3
+# SPDX-License-Identifier: Apache-2.0
+#
+
 from __future__ import print_function
 import numpy as np
 import argparse
@@ -9,6 +15,9 @@ from torchvision import datasets, transforms, utils
 from torch.optim.lr_scheduler import StepLR
 import torch.quantization as quant
 import pandas as pd
+import matplotlib.pyplot as plt
+from sklearn.metrics import confusion_matrix, accuracy_score
+import seaborn as sns
 
 from data_preprocessor import preprocessor, generate_cocotb_tests
 
@@ -32,10 +41,17 @@ class TwoBitQuantizationObserver(quant.ObserverBase):
         # Quantize to 2 bits
         return torch.clamp(x.round(), self.quant_min, self.quant_max)
 
-# Neural Network Model
-# Desc: pytorch neural network design used to classify MNIST images
+######################################################################
+# Neural Network Model                                               #
+# --------------------                                               #
+# Desc: pytorch neural network design used to classify MNIST images  #
+# NOTE: The neural network defined here will be used to train, test, #
+# and deploy to verilog for Tiny Tapeout Design.                     #
+#                                                                    #
+######################################################################
+# MNIST Pytorch Example:
 #
-#
+#class MNISTEXAMPLENet(nn.Module):
 class Net(nn.Module):
     def __init__(self):
         super(Net, self).__init__()
@@ -61,17 +77,60 @@ class Net(nn.Module):
         output = F.log_softmax(x, dim=1)
         return output
 
+# Claude.ai
+class ClaudeNet(nn.Module):
+#class Net(nn.Module):
+    def __init__(self):
+        super(Net, self).__init__()
+        # Input layer: 196 inputs (14x14 flattened image)
+        # First hidden layer: 128 neurons with ReLU activation
+        self.fc1 = nn.Linear(196, 128)
+        # Second hidden layer: 64 neurons with ReLU activation
+        self.fc2 = nn.Linear(128, 64)
+        # Output layer: 10 neurons (one for each digit 0-9)
+        self.fc3 = nn.Linear(64, 10)
+        # Dropout for regularization
+        self.dropout = nn.Dropout(0.2)
+    
+    def forward(self, x):
+        # Flatten the input if it's not already flattened
+        # TODO - why is flattening needed for this Net() and not the other???
+        if len(x.shape) > 2:
+            print("FLATTENING")
+            x = x.view(x.size(0), -1)
+        
+        # Pass through first hidden layer with ReLU activation
+        x = F.relu(self.fc1(x))
+        x = self.dropout(x)
+        
+        # Pass through second hidden layer with ReLU activation
+        x = F.relu(self.fc2(x))
+        x = self.dropout(x)
+        
+        # Output layer (no activation here; will be applied in loss function)
+        x = self.fc3(x)
+        return x
+
+
 # Training Helper Function
 # desc: perfom training on a model given the parameters
 # inputs:
 # returns: None
 def train(args, model, device, train_loader, optimizer, epoch):
     model.train()
+    criterion = nn.CrossEntropyLoss()
+
+    # Logging, Training Visualization
+    train_losses = []
+    test_losses = []
+    test_accuracies = []
+
     for batch_idx, (data, target) in enumerate(train_loader):
         data, target = data.to(device), target.to(device)
         optimizer.zero_grad()
         output = model(data)
-        loss = F.nll_loss(output, target)
+        #loss = F.nll_loss(output, target)
+        loss = criterion(output, target)
         loss.backward()
         optimizer.step()
         if batch_idx % args.log_interval == 0:
@@ -80,6 +139,17 @@ def train(args, model, device, train_loader, optimizer, epoch):
                 100. * batch_idx / len(train_loader), loss.item()))
             if args.dry_run:
                 break
+
+
+        #TODO - keep track of training progression. create plots that display and save to files to be embedded in README
+        train_loss = running_loss / len(train_loader)
+        train_losses.append(train_loss)
+
+        #test_loss = test_loss / len(test_loader)
+        #test_losses.append(test_loss)
+        
+        #accuracy = 100 * correct / total
+        #test_accuracies.append(accuracy)
 
 # Testing Helper Function
 # desc: test the model on a test set
@@ -112,8 +182,8 @@ def train_model():
     parser = argparse.ArgumentParser(description='PyTorch MNIST Example')
     parser.add_argument('--batch-size', type=int, default=64, metavar='N',help='input batch size for training (default: 64)')
     parser.add_argument('--test-batch-size', type=int, default=1000, metavar='N',help='input batch size for testing (default: 1000)')
-    parser.add_argument('--epochs', type=int, default=5, metavar='N', help='number of epochs to train (default: 14)')
-    parser.add_argument('--lr', type=float, default=1.0, metavar='LR', help='learning rate (default: 1.0)')
+    parser.add_argument('--epochs', type=int, default=15, metavar='N', help='number of epochs to train (default: 15)')
+    parser.add_argument('--lr', type=float, default=0.001, metavar='LR', help='learning rate (default: 1.0)')
     parser.add_argument('--gamma', type=float, default=0.7, metavar='M',help='Learning rate step gamma (default: 0.7)')
     parser.add_argument('--no-cuda', action='store_true', default=False, help='disables CUDA training')
     parser.add_argument('--no-mps', action='store_true', default=False, help='disables macOS GPU training')
@@ -151,6 +221,8 @@ def train_model():
     test_loader = torch.utils.data.DataLoader(dataset2, **test_kwargs)
 
     model = Net().to(device)
+    optimizer = optim.Adam(model.parameters(), lr=args.lr)
+
     optimizer = optim.Adadelta(model.parameters(), lr=args.lr)
 
     # Example usage with quantization aware training
@@ -216,12 +288,41 @@ def test_model(model):
     # Test
     test(model, device, test_loader)
 
+    # Test Results/Analytics
+    # TODO - create plots that display and save to files to be embedded in README
+    # TODO - issues with matplotlib plotting. core dumped
+    model.eval()
+    all_preds = []
+    all_labels = []
+    
+    with torch.no_grad():
+        for inputs, labels in test_loader:
+            outputs = model(inputs)
+            _, predicted = torch.max(outputs, 1)
+            
+            all_preds.extend(predicted.numpy())
+            all_labels.extend(labels.numpy())
+    
+    # Calculate accuracy
+    accuracy = accuracy_score(all_labels, all_preds)
+    print(f"Test Accuracy: {accuracy * 100:.2f}%")
+    
+    # Create confusion matrix
+    cm = confusion_matrix(all_labels, all_preds)
+    plt.figure(figsize=(10, 8))
+    sns.heatmap(cm, annot=True, fmt='d', cmap='Blues')
+    plt.xlabel('Predicted Label')
+    plt.ylabel('True Label')
+    plt.title('Confusion Matrix')
+    plt.show()
+
 # Convert Model to Verilog
 # Desc: Convert Pytorch model into a hardware description language such as Verilog
 # Inputs: None
 # Returns: None
 def convert_model_to_verilog():
     print("Converting model to verilog")
+    # TODO
 
 # Generate Test-Cases
 # Desc: Generate cocotb test-cases based on images from the MNIST test set.
@@ -284,26 +385,25 @@ if __name__ == '__main__':
         torch.save(model.state_dict(), "mnist_cnn.pt")
         print("Saving Model...Done")
     elif(selection == '2'):
-        # Load from File
         print("Loading Model...")
         model = Net()
         model.load_state_dict(torch.load('mnist_cnn.pt'))
         model.eval()
         #optimizer.load_state_dict(checkpoint['optimizer_state_dict'])
         print("Loading Model...Done")
-        # call testing function
         print("Testing Model...")
         test_model(model)
         print("Testing Model...Done")
     elif(selection == '3'):
-        # Load from File
         print("Loading Model")
         model = Net()
         model.load_state_dict(torch.load('mnist_cnn.pt'))
         model.eval()
         print("Loading Model...Done")
-        # convert model
-        # TODO
+        print("Converting Model...")
+        convert_model_to_verilog()
+        print("Converting Model...Done")
+
     elif(selection == '4'):
         print("Generating Tests...")
         generate_testcases()
