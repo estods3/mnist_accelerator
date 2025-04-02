@@ -19,7 +19,7 @@ Input --> |  Serialized to ASIC --> | Neural Network --> | Output
 Input images from the [MNIST Dataset](https://en.wikipedia.org/wiki/MNIST_database) are preprocessed by a raspberry pi and transmitted to the ASIC. The images in MNIST are 28x28 grayscale images. However, as part of the preprocessing step, these images are reduced to a 14x14 black/white image to reduce the amount of data needed to be transmitted to the ASIC and to reduce the complexity of the neural network. Since the images are 14x14, a 8-pin interface (ui_in) is used which transmits 7 pixels at a time for 28 clock cycles to transmit each image. The remaining bit, the most significant bit (MSB), is a active-low signal. pulled low to start transmitting a new image.
 
 ### Preprocessing Python Script
-A preprocessing python script is provided to convert the standard MNIST images into the reduced dataformat used in this project. The script is used to generate training images as well as cocotb unit-tests. (Coming Soon).
+A preprocessing python script (utility.py) is provided to convert the standard MNIST images into the reduced dataformat used in this project. The script is used to train the network, test the network, convert the pytorch implementation into verilog, and generate cocotb unit-tests directly from the MNIST dataset.
 
 ## Design
 
