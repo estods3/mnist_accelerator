@@ -1,3 +1,9 @@
+#
+# Copyright (c) 2024 Evan Stoddart
+# github.com/estods3
+# SPDX-License-Identifier: Apache-2.0
+#
+
 from __future__ import print_function
 import numpy as np
 import argparse
