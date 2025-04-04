@@ -5,7 +5,7 @@
 
 `default_nettype none
 
-`timescale 1ns / 1ps
+//`timescale 1ns / 1ps
 
 module digit_classifier (
     input wire clk,
@@ -262,90 +262,4 @@ module digit_classifier (
         digit_out = 0;
     end
     
-endmodule
-
-// Testbench for the digit classifier
-module digit_classifier_tb;
-    // Testbench signals
-    reg clk;
-    reg rst_n;
-    reg start;
-    reg [195:0] image_in;
-    wire [3:0] digit_out;
-    wire valid_out;
-    
-    // Instantiate the digit classifier
-    digit_classifier dut (
-        .clk(clk),
-        .rst_n(rst_n),
-        .start(start),
-        .image_in(image_in),
-        .digit_out(digit_out),
-        .valid_out(valid_out)
-    );
-    
-    // Clock generation
-    initial begin
-        clk = 0;
-        forever #5 clk = ~clk;  // 100MHz clock
-    end
-    
-    // Test sequence
-    initial begin
-        // Initialize signals
-        rst_n = 0;
-        start = 0;
-        image_in = 0;
-        
-        // Apply reset
-        #20 rst_n = 1;
-        
-        // Generate a test image (pattern resembling digit "1")
-        #10;
-        // Create a simple pattern for digit 1 (vertical line in middle)
-        for (integer i = 0; i < 14; i = i + 1) begin
-            image_in[i*14 + 7] = 1;  // Set middle column pixels to 1
-        end
-        
-        // Start classification
-        start = 1;
-        #10 start = 0;
-        
-        // Wait for result
-        wait(valid_out);
-        $display("Test pattern 1 - Classified digit: %d", digit_out);
-        
-        // Allow some time to observe the output
-        #50;
-        
-        // Create another test pattern (resembling digit "0" - oval shape)
-        image_in = 0;
-        // Top and bottom rows
-        for (integer j = 4; j < 10; j = j + 1) begin
-            image_in[j] = 1;             // Top row
-            image_in[13*14 + j] = 1;     // Bottom row
-        end
-        // Side columns
-        for (integer i = 1; i < 13; i = i + 1) begin
-            image_in[i*14 + 3] = 1;      // Left side
-            image_in[i*14 + 10] = 1;     // Right side
-        end
-        
-        // Start classification again
-        start = 1;
-        #10 start = 0;
-        
-        // Wait for result
-        wait(valid_out);
-        $display("Test pattern 2 - Classified digit: %d", digit_out);
-        
-        // Finish simulation
-        #100 $finish;
-    end
-    
-    // Monitor for output
-    initial begin
-        $monitor("Time: %t, State: %d, Neuron: %d, Valid: %b, Digit: %d", 
-                 $time, dut.state, dut.neuron_counter, valid_out, digit_out);
-    end
 endmodule

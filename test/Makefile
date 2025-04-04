@@ -5,7 +5,7 @@
 SIM ?= icarus
 TOPLEVEL_LANG ?= verilog
 SRC_DIR = $(PWD)/../src
-PROJECT_SOURCES = project.v decoder.v readimage.v
+PROJECT_SOURCES = project.v decoder.v readimage.v neuralnetwork.v
 
 ifneq ($(GATES),yes)
 

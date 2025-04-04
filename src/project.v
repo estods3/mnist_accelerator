@@ -21,6 +21,7 @@ module tt_um_estods3_nnaccelerator (
     reg [6:0] input_image_row;
     reg [6:0] seven_seg_display_out;
     reg reset_flag;
+    reg complete_flag;
     reg classification_complete_flag;
     reg [3:0] digit_classification_bcd;
     reg [3:0] digit_classification_nn_bcd;
@@ -35,13 +36,12 @@ module tt_um_estods3_nnaccelerator (
     assign input_image_row = ui_in[6:0];                   // First 7 ui_in bits used to read image (row by row)
     assign reset_flag = ui_in[7];                          // Last 1 ui_in bit used as a reset_flag
     assign uo_out[6:0] = seven_seg_display_out;            // First 7 uo_out bits used for 7-seg Display
-    assign uo_out[7] = classification_complete_flag;       // Last 1 uo_out bit used as a complete flag
+    assign uo_out[7] = complete_flag;                      // Last 1 uo_out bit used as a complete flag
     // use bidirectionals as outputs
     assign uio_oe = 8'b11111111;                           // All uio set as outputs
     assign uio_out[3:0] = digit_classification_bcd;        // First 4 uio bits set as BCD Output
     assign uio_out[7:4] = 0;                               // Last 4 uio bits not used, set to 0.
     wire _unused = &{ena, uio_in, rst_n, 1'b0};            /// List all unused inputs to prevent warnings
-
 
     // Input Image
     // -----------
@@ -49,37 +49,12 @@ module tt_um_estods3_nnaccelerator (
     // Another Image will be sent when reset_flag is low
     ImageReader ImageReader(.clk(clk), .reset_n(reset_flag), .data_in(input_image_row), .image_data(image_array), .image_ready(image_ready));
     
-    // Process Image
-    // -------------
-    always @(posedge clk) begin
-        //image_ready <= 1'b1;     //TESTING ONLY, REMOVE
-        //image_array <= 10;       //TESTING ONLY, REMOVE
-        if(image_ready) begin
 
-            // Neural Network - Perform Inferencing (Forward Pass)
-            // ---------------------------------------------------
-            digit_classifier digit_classifier(.image_in(image_array), .digit_out(digit_classification_nn_bcd));
+    // classifier
+    // ----------
+    // Perform Inferencing (Forward Pass)
+    digit_classifier classifier(.clk(clk), .rst_n(rst_n & image_ready), .start(image_ready), .image_in(image_array), .digit_out(digit_classification_nn_bcd), .valid_out(classification_complete_flag));
 
-            // Output Layer - Extract Highest Confidence Neuron
-            // ------------------------------------------------
-            // TESTING MODE - If the sum of the image is a digit (0-9)
-            if(image_array <= 196'd9) begin
-                digit_classification_bcd <= image_array;
-            end else begin
-                digit_classification_bcd <= digit_classification__nn_bcd; 
-            end
-
-            //checksum test with specific BCD = 2
-            //Test-Case: test_batch1_sample13(dut):
-            if(image_array == 624593747860664244535771027553003879777959936) begin
-                digit_classification_bcd <= 4'b0010;
-            end
-
-            classification_complete_flag <= 1'b1;
-        end else begin
-            classification_complete_flag <= 1'b0;
-        end
-    end
 
     // Output
     // ------
@@ -87,5 +62,31 @@ module tt_um_estods3_nnaccelerator (
     // output classification as BCD to output pins
     // raise flag to signal to raspberry pi to send another image
     seg7 seg7(.counter(digit_classification_bcd), .segments(seven_seg_display_out));
+
+
+    // Process Image
+    // -------------
+    always @(posedge clk) begin
+        if(image_ready) begin    
+            // Output
+            // ------
+            if(image_array <= 196'd9) begin
+                // TESTING MODE - If the sum of the image is a digit (0-9)
+                // This is to test if the BCD to seven segment decoder works
+                digit_classification_bcd <= image_array;
+                complete_flag <= 1'b1;
+            end else begin
+                wait(classification_complete_flag);
+                if (classification_complete_flag) begin                
+                    // NORMAL MODE - if NN produces a valid output, set it to the digit_classification_bcd
+                    digit_classification_bcd <= digit_classification_nn_bcd;
+                    complete_flag <= classification_complete_flag;
+                    //image_ready <= 0; //TODO - cant drive image_ready, do we need to reset it here?
+                end
+            end
+        end else begin
+            complete_flag <= 1'b0;
+        end
+    end
 
 endmodule
