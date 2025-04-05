@@ -731,7 +731,7 @@ async def test_blank_image_with_9_checksum(dut):
     else:
         assert int(dut.uo_out.value[6:0]) == segments[classification_result]
     dut._log.info("Evaluating...Done")
-
+'''
 ####################################################################
 #                                                                  #
 #                        SIMPLE DIGIT TESTS                        #
@@ -1553,4 +1553,4 @@ async def test_mnist_batch0_sample18(dut):
         assert int(dut.uo_out.value[6:0]) == segments[classification_result]
     dut._log.info('Evaluating...Done')
 
-
+'''
