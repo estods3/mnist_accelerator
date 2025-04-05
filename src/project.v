@@ -76,7 +76,6 @@ module tt_um_estods3_nnaccelerator (
                 digit_classification_bcd <= image_array;
                 complete_flag <= 1'b1;
             end else begin
-                wait(classification_complete_flag);
                 if (classification_complete_flag) begin                
                     // NORMAL MODE - if NN produces a valid output, set it to the digit_classification_bcd
                     digit_classification_bcd <= digit_classification_nn_bcd;
