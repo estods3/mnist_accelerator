@@ -73,6 +73,17 @@ Goal - show results of chip vs identical python-based neural network implementat
 - [Build your design locally](https://www.tinytapeout.com/guides/local-hardening/)
 
 ## References
+@ARTICLE{leflow,
+     author = {{Noronha}, D.~H. and {Salehpour}, B. and {Wilton}, S.~J.~E.},
+     title = "{LeFlow: Enabling Flexible FPGA High-Level Synthesis of Tensorflow Deep Neural Networks}",
+     journal = {ArXiv e-prints},
+     archivePrefix = "arXiv",
+     eprint = {1807.05317},
+     keywords = {Computer Science - Machine Learning, Statistics - Machine Learning},
+     year = 2018,
+     month = jul,
+     adsurl = {http://adsabs.harvard.edu/abs/2018arXiv180705317N}
+} 
 - [Example Verilog TT Seven Segment Display](https://github.com/TinyTapeout/tt05-verilog-demo/blob/main/src/tt_um_seven_segment_seconds.v)
 - [Example Verilog reading an image](https://www.edaboard.com/threads/reading-image-file-in-verilog.268155/)
 - [Example PyTorch MNIST Neural Network](https://github.com/pytorch/examples/blob/main/mnist/main.py)
